@@ -59,7 +59,7 @@ ROOT_URLCONF = 'homeswap.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'messaging' / 'templates' / 'messaging'],  # Updated DIRS option
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -71,6 +71,7 @@ TEMPLATES = [
         },
     },
 ]
+
 
 WSGI_APPLICATION = 'homeswap.wsgi.application'
 
