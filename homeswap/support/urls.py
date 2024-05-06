@@ -1,5 +1,8 @@
 from django.urls import path
+from .views import submit_support_request
 
 urlpatterns = [
-    # You can add your url patterns here when ready.
+    path('submit/', submit_support_request, name='submit_support_request'),
+    # Add more URLs as needed
 ]
+
