@@ -1,26 +1,32 @@
-from django.http import JsonResponse
-from .models import BlogPost
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
+from .serializers import SearchParamsSerializer
+from .models import SearchQuery
 
 
-def search_blog_posts(request):
-    max_capacity_filter = request.GET.get('max_capacity')
-    from_city_filter = request.GET.get('from_city')
-    to_city_filter = request.GET.get('to_city')
-    dates_filter = request.GET.get('dates')
-    
-    blog_posts = BlogPost.objects.all()
-    
-    if max_capacity_filter:
-        blog_posts = blog_posts.filter(max_capacity=max_capacity_filter)
-    if from_city_filter:
-        blog_posts = blog_posts.filter(from_city=from_city_filter)
-    if to_city_filter:
-        blog_posts = blog_posts.filter(to_city=to_city_filter)
-    if dates_filter:
-        blog_posts = blog_posts.filter(date_period=dates_filter)
-    
-    data = [{'from_city': post.from_city, 'to_city': post.to_city,
-             'description': post.description} for post in blog_posts]
-    return JsonResponse(data, safe=False)
+@api_view(['GET'])
+def search_view(request):
+    serializer = SearchParamsSerializer(data=request.query_params)
+    if serializer.is_valid():
+        from_city = serializer.validated_data['from_city']
+        to_city = serializer.validated_data['to_city']
+        max_capacity = serializer.validated_data.get('max_capacity')
+        start_date = serializer.validated_data.get('start_date')
+        end_date = serializer.validated_data.get('end_date')
+        
+        
+        search_queries = SearchQuery.objects.filter(
+            from_city=from_city,
+            to_city=to_city,
+            max_capacity__lte=max_capacity if max_capacity else SearchQuery._meta.get_field('max_capacity').get_max_valid_value(),
+            start_date__gte=start_date,
+            end_date__lte=end_date
+        )
+        
+        return Response({"message": "Search successful"})
+    return Response(serializer.errors, status=400 )
+
+
+
 
 
