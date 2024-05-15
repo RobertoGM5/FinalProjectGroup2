@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search API Demo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+        h1 {
+            color: #333;
+        }
+        form > div {
+            margin-bottom: 10px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"],
+        input[type="number"],
+        input[type="date"] {
+            width: 100%;
+            padding: 8px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #search-results {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Search API Demo</h1>
+    <div>
+        <label for="from_city">From City:</label>
+        <input type="text" id="from_city" name="from_city">
+    </div>
+    <div>
+        <label for="to_city">To City:</label>
+        <input type="text" id="to_city" name="to_city">
+    </div>
+    <div>
+        <label for="max_capacity">Max Capacity:</label>
+        <input type="number" id="max_capacity" name="max_capacity">
+    </div>
+    <div>
+        <label for="start_date">Start Date:</label>
+        <input type="date" id="start_date" name="start_date">
+    </div>
+    <div>
+        <label for="end_date">End Date:</label>
+        <input type="date" id="end_date" name="end_date">
+    </div>
+    <button onclick="search()">Search</button>
+    <div id="search-results"></div>
+
+    <script>
+        function search() {
+            var from_city = document.getElementById('from_city').value;
+            var to_city = document.getElementById('to_city').value;
+            var max_capacity = document.getElementById('max_capacity').value;
+            var start_date = document.getElementById('start_date').value;
+            var end_date = document.getElementById('end_date').value;
+
+            var url = 'http://url/search/?from_city=' + encodeURIComponent(from_city) + '&to_city=' + encodeURIComponent(to_city) + '&max_capacity=' + encodeURIComponent(max_capacity) + '&start_date=' + encodeURIComponent(start_date) + '&end_date=' + encodeURIComponent(end_date);
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    // Handle the response data, update the UI accordingly
+                    var resultsDiv = document.getElementById('search-results');
+                    resultsDiv.innerHTML = JSON.stringify(data);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+    </script>
+</body>
+</html>    
