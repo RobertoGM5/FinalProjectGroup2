@@ -1,6 +1,7 @@
-from django.apps import AppConfig
+# messaging/forms.py
+from django import forms
 
-
-class MessagingConfig(AppConfig):
-    default_auto_field = 'django.db.models.BigAutoField'
-    name = 'messaging'
+class MessageForm(forms.Form):
+    recipient_email = forms.EmailField(label='Recipient Email')
+    subject = forms.CharField(max_length=100)
+    message = forms.CharField(widget=forms.Textarea)

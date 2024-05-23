@@ -3,17 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}My Website{% endblock %}</title>
-    <!-- Add any CSS or meta tags here -->
+    <title>{% block title %}HomeSwap{% endblock %}</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #9ec1d7; /* Replace with your desired background color */
+        }
+        .card-header, .card-body {
+            background-color: #fff;
+        }
+    </style>
+    {% block extra_css %}{% endblock %}
 </head>
 <body>
-    <!-- Add your navigation, header, or other common elements here -->
-
-    <div class="content">
-        {% block content %}
-        {% endblock %}
-    </div>
-
-    <!-- Add your footer or other common elements here -->
+    {% block content %}{% endblock %}
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

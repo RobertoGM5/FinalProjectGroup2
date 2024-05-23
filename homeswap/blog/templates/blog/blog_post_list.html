@@ -61,7 +61,7 @@
                                 <div>
                                     <div>
                                         <p class="card-text">Description:</p>
-                                    </div> 
+                                    </div>
                                     <div class="description">
                                         <p class="card-text" style="color: white;">{{ blog_post.description }}</p>
                                     </div>
@@ -100,6 +100,12 @@
                             {% endfor %}
                         </div>
                         {% endif %}
+
+                        <!-- Add Send Message button here -->
+                        <div class="d-flex justify-content-end mt-3">
+                            <a href="/messaging/send?recipient={{ blog_post.user.email }}" class="btn btn-primary">Send Message</a>
+                        </div>
+
                     </div>
                 </div>
             </div>

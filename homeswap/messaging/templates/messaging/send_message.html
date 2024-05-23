@@ -1,12 +1,44 @@
 {% extends "base.html" %}
 
-{% block title %}Send a Message{% endblock %}
-
 {% block content %}
-<h2>Send a Message</h2>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Send</button>
-</form>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Send Message</h4>
+                </div>
+                <div class="card-body">
+                    <form id="messageForm" action="{% url 'messaging:send_message' %}" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="recipient_email" id="recipient_email">
+                        <div class="mb-3">
+                            <label for="subject" class="form-label">Subject:</label>
+                            <input type="text" class="form-control" id="subject" name="subject" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="message" class="form-label">Message:</label>
+                            <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Send</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function getQueryParam(name) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(name);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const recipientEmail = getQueryParam('recipient');
+        if (recipientEmail) {
+            document.getElementById('recipient_email').value = recipientEmail;
+        }
+    });
+</script>
 {% endblock %}

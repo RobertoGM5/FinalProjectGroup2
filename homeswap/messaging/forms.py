@@ -1,7 +1,7 @@
+# messaging/forms.py
 from django import forms
-from .models import Message
 
-class MessageForm(forms.ModelForm):
-    class Meta:
-        model = Message
-        fields = ['recipient', 'subject', 'body']
+class MessageForm(forms.Form):
+    recipient_email = forms.EmailField(label='Recipient Email')
+    subject = forms.CharField(max_length=100)
+    message = forms.CharField(widget=forms.Textarea)
