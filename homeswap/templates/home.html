@@ -327,17 +327,16 @@
             </div>
         <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
             <div>
-                <form action="mailto:roberto@email.com" method="get" enctype="text/plain">
-                Name:<br>
-                <input type="text" name="name" placeholder="Your Name" size="100"><br>
-                <br>
-                Email:<br>
-                <input type="email" name="email" placeholder="Your Email" size="100"><br>
-                <br>
-                Message:<br>
-                <textarea name="body" rows="5" cols="102" placeholder="Your Message"></textarea><br>
-                <input type="submit" value="Send">
+                <form method="post" action="{% url 'support:support_request' %}">
+                    {% csrf_token %}
+                    {{ support_form.as_p }}
+                    <button type="submit">Submit</button>
                 </form>
+                {% if thank_you_message %}
+                <div class="alert alert-success" role="alert">
+                    Thank you for your support request. We will respond to you as soon as possible.
+                </div>
+                {% endif %}
             </div>
             <img src="{% static 'img/homeswap2.png' %}" alt="">
         </footer>

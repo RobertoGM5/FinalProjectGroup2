@@ -168,7 +168,7 @@ EMAIL_PORT = 587  # Port for SMTP server
 EMAIL_USE_TLS = True  # Whether to use TLS for secure connection
 EMAIL_HOST_USER = 'dci.team2@gmail.com'  # Your email address for sending emails
 EMAIL_HOST_PASSWORD = 'kqrjttrqswgipacr'  # Your email password or app password
-DEFAULT_FROM_EMAIL = 'dci.team2@gmail.com'  # Default sender email address
+DEFAULT_FROM_EMAIL = 'noreply@homeswap.com'  # Default sender email address
 EMAIL_SUBJECT_PREFIX = '[Support]'  # Prefix for email subjects
 
 

@@ -1,5 +1,3 @@
-# messaging/forms.py
-
 from django import forms
 from .models import SupportRequest
 
